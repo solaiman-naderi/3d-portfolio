@@ -1,15 +1,18 @@
-import { OrbitControls } from '@react-three/drei'
+import { Float, Environment, useGLTF, OrbitControls } from "@react-three/drei";
 
-export default function Experience()
-{
-    return <>
+export default function Experience() {
+  const model = useGLTF("/model.gltf");
 
-        <OrbitControls makeDefault />
-        
-        <mesh>
-            <boxGeometry />
-            <meshNormalMaterial />
-        </mesh>
+  return (
+    <>
+      <Environment files={"/potsdamer_platz_1k.hdr"} />
 
+      <color args={["#695b5b"]} attach={"background"} />
+
+      <OrbitControls makeDefault />
+      <Float>
+        <primitive object={model.scene} position-y={-1.2} />
+      </Float>
     </>
+  );
 }
